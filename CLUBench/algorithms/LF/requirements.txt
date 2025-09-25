@@ -1,0 +1,10 @@
+faiss==1.7.4
+matplotlib==3.7.3
+munkres==1.1.4
+numpy==1.24.4
+Pillow==11.1.0
+scikit_learn==1.3.0
+scipy==1.10.1
+torch==1.13.1+cu117
+torchvision==0.14.1+cu117
+tqdm==4.66.1
