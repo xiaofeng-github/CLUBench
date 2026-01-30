@@ -1,0 +1,10 @@
+{
+    "epochs": 300,
+    "stop_epochs": 50, 
+    "lr": 1e-3,
+    "batch_size": 100, 
+    "lamda": 1.0,
+    "noise_std": 0.01,
+    "hidden_dims": [512, 256, 128],
+    "device": "cuda"
+}

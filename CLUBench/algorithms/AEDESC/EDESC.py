@@ -219,7 +219,7 @@ def refined_subspace_affinity(s):
 def pretrain_ae(model,lr,dataset,device):
 
     train_loader = DataLoader(dataset, batch_size=512, shuffle=True)
-    print(model)
+    # print(model)
     optimizer = Adam(model.parameters(), lr=lr)
     model.train()
     for epoch in range(50):
@@ -315,7 +315,7 @@ def train_EDESC(x,y,n_input,n_clusters,num_sample,beta,d,n_z,lr,eta,pretrain_lr,
         loss.backward()
         optimizer.step()
     end = time.time()
-    print('Running time: ', end-start)
+    # print('Running time: ', end-start)
     return preds
  
 

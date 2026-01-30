@@ -209,5 +209,5 @@ class PICA(BaseCluster):
         self.labels=train(model,self.dataset,epochs=self.epochs,stop_epochs=self.stop_epochs,lr=self.lr,batch_size=self.batch_size,device=self.device)
         if self.final_epoch:
             self.labels=self.labels[-1]
-        self.times = time.time() - self.times
+        self.time = time.time() - self.time
         return self.labels

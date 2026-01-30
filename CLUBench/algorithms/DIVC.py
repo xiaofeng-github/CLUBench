@@ -311,6 +311,6 @@ class DIVC(BaseCluster):
 
         if self.final_epoch:
             self.labels = self.labels[-1]
-        self.times = time.time() - self.times
+        self.time = time.time() - self.time
         return self.labels
     

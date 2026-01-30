@@ -1,0 +1,12 @@
+{
+    "epochs": 300, 
+    "stop_epochs": 50,
+    "lr": 1e-3,
+    "batch_size": 100, 
+    "lamda": 0.5,
+    "noise_std": 0.01,
+    "NMI_target": 1.0,
+    "hidden_dims": [512, 256, 128],
+    "threshold_rate": 0.99,
+    "device": "cuda"
+}

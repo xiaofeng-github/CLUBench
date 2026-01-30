@@ -1,0 +1,10 @@
+{
+    "epochs": 300,
+    "stop_epochs": 50, 
+    "lr": 1e-4,
+    "batch_size": 512, 
+    "gamma": 0.1,
+    "hidden_dims": [512, 256, 128],
+    "emb_dim": 32,
+    "device": "cuda"
+}

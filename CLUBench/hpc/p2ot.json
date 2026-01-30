@@ -1,0 +1,11 @@
+{
+    "epochs": 300, 
+    "stop_epochs": 50, 
+    "lr": 1e-3,
+    "batch_size": 512, 
+    "hidden_dims": [512, 256, 128],
+    "emb_dim": 64,
+    "rho_base": 0.1,
+    "rho_strategy": "linear",
+    "device": "cuda"
+}

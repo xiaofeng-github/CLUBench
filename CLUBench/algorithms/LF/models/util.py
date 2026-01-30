@@ -1,19 +1,17 @@
 import os
-from os import path as osp
 
 import numpy as np
 import torch
 import torchvision
 from torchvision.transforms import transforms
 import torch.nn.functional as F
-import sys
-sys.path.append((osp.dirname(osp.abspath(__file__))))
-sys.path.append(osp.dirname(osp.dirname(osp.abspath(__file__))))
+
+import torch_clustering
 # from data.STL10 import CustomSTL10
 # from data.cifar10 import CustomCIFAR10
 # from data.cifar100 import CustomCIFAR100
 # from data.imagenet import CustomImagenet
-#from utils import TwoCropTransform, MemTransform
+from utils import TwoCropTransform, MemTransform
 
 
 def normalize(dataset_name):

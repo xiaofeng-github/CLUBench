@@ -48,8 +48,8 @@ def SP_for_affine_matrix(n_clusters,A):
     # 2. 计算对称归一化拉普拉斯矩阵
     L_sym = torch.eye(A.shape[0], device=A.device) - D_inv_sqrt @ A @ D_inv_sqrt
     # 3. 特征分解
-    print("Has NaN:", torch.isnan(L_sym).any().item())
-    print("Has Inf:", torch.isinf(L_sym).any().item()) 
+    # print("Has NaN:", torch.isnan(L_sym).any().item())
+    # print("Has Inf:", torch.isinf(L_sym).any().item()) 
     #L_sym=L_sym.detach().cpu()
     eigenvalues, eigenvectors = torch.linalg.eigh(L_sym)  # 使用更稳定的torch.linalg.eigh
     #print(eigenvalues)
@@ -332,5 +332,5 @@ class DSCN(BaseCluster):
         self.labels=train(model=self.model,device=self.device,stop_epochs=self.stop_epochs,n_clusters=self.n_clusters,x=self.X,y=self.Y,epochs=self.epochs,lr=self.lr,weight_coef=self.weight_coef,weight_selfExp=self.weight_selfExP,alpha=self.alpha,dim_subspace=self.dim_subspace,ro=self.ro,show=self.show,pretrain_epochs=self.pretrain_epochs)
         if self.final_epoch:
             self.labels=self.labels[-1]
-        self.times=time.time()-self.times
+        self.time=time.time()-self.time
         return self.labels

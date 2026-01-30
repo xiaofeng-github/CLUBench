@@ -1,0 +1,11 @@
+{
+    "epochs": 300,
+    "stop_epochs": 50,
+    "lr": 1e-3, 
+    "weight_coef": 0.1,
+    "hidden_dims": [512, 256, 128],
+    "emb_dim": 32,
+    "weight_selfExp": 150,
+    "dim_subspace": 10,
+    "device": "cuda"
+}

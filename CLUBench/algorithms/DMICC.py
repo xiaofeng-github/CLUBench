@@ -11,6 +11,7 @@ from .base import BaseCluster
 import sys
 from torch.autograd import Function
 
+
 class Loss_FMI(nn.Module):
     def __init__(self):
         super().__init__()
@@ -36,6 +37,7 @@ class Loss_FMI(nn.Module):
 
         return loss_fmi
 
+
 class Loss_ID(nn.Module):
     def __init__(self, tau2):
         super().__init__()
@@ -60,6 +62,7 @@ def compute_joint(view1, view2):
     p_i_j = p_i_j / p_i_j.sum()  # normalise
 
     return p_i_j
+
 
 def crossview_contrastive_Loss(view1, view2, EPS=sys.float_info.epsilon):
     _, k = view1.size()
@@ -87,6 +90,7 @@ def crossview_contrastive_Loss(view1, view2, EPS=sys.float_info.epsilon):
     loss = loss.sum()
 
     return loss
+
 
 class NonParametricClassifierOP(Function):
     @staticmethod
@@ -143,6 +147,7 @@ class Normalize(nn.Module):
         out = x.div(norm)
         return out
 
+
 class CustomDataset(Dataset):
     def __init__(self, data, labels=None):
         self.data = data
@@ -153,6 +158,7 @@ class CustomDataset(Dataset):
 
     def __getitem__(self, idx):
         return self.data[idx], self.labels[idx],idx
+
 
 class SimpleMLP(nn.Module):
     def __init__(self, input_dim, hidden_dims,output_dim):
@@ -189,11 +195,11 @@ class SimpleMLP(nn.Module):
 #-------------------------------
 # In PICAnet, the only augementation way is to add gaussian noise to original data. 
 class DMnet(BaseCluster):
-    def __init__(self, n_clusters,low_dim=64,hidden_dims=[512,256,128],
+    def __init__(self, n_clusters,emb_dim=64,hidden_dims=[512,256,128],
                  stop_epochs=50,noise_std=0.01,device='cuda',lamda1=0.00001,
                  lamda2=0.00001,batch_size=256,epochs=300,lr=1e-3, final_epoch=True):
         super(DMnet, self).__init__()
-        self.lowdim=low_dim
+        self.lowdim=emb_dim
         self.hidden_dims=hidden_dims
         self.stop_epochs=stop_epochs
         self.lamda1=lamda1
@@ -273,7 +279,7 @@ class DMnet(BaseCluster):
         self.labels = preds
         if self.final_epoch:
             self.labels = preds[-1]
-        self.times = time.time() - self.times
+        self.time = time.time() - self.time
         return self.labels
 
     

@@ -6,6 +6,7 @@ import os.path as osp
 
 ROOT_DIR = osp.dirname(osp.abspath(__file__))
 DATA_DIR = osp.join(ROOT_DIR, 'datasets')
+HPC_DIR = osp.join(ROOT_DIR, 'hpc')
 
 
 DATASETS = [

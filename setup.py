@@ -7,8 +7,8 @@ with open(osp.join(osp.dirname(osp.abspath(__file__)), 'requirements.txt'), enco
 
 setup(
     name="CLUBench",
-    version='0.1',
-    author="",
+    version='0.2',
+    author="Feng Xiao, Dazhi FU",
     author_email="",
     url='',
     description='Python package for Clustering',

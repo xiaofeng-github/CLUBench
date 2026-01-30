@@ -3,7 +3,7 @@ from torch.utils.data import Dataset
 from torch import nn
 import torch.nn.functional as F
 from collections import OrderedDict
-from sklearn.metrics import confusion_matrix, normalized_mutual_info_score, adjusted_rand_score
+from sklearn.metrics import confusion_matrix
 from scipy.optimize import linear_sum_assignment
 import torch
 import json
@@ -108,7 +108,7 @@ def clustetring_acc_hungarian(y_true, y_pred):
     return accuracy
 
 
-def compute_distance_matrix(self, X):
+def compute_distance_matrix(X, metric, device):
 
     """
     Compute pairwise distance matrix for an n x d dataset.
@@ -121,22 +121,22 @@ def compute_distance_matrix(self, X):
         Distance matrix of shape (n_samples, n_samples).
     """
     # Convert to PyTorch if not already
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    # device = 'cuda' if torch.cuda.is_available() else 'cpu'
     if not isinstance(X, torch.Tensor):
         X = torch.tensor(X, dtype=torch.float32, device=device)
     
-    if self.metric == 'euclidean':
+    if metric == 'euclidean':
         # ||x_i - x_j||^2 = ||x_i||^2 + ||x_j||^2 - 2 * x_i @ x_j
         X_norm = torch.sum(X**2, dim=1, keepdim=True)
         dist_sq = X_norm + X_norm.T - 2 * X @ X.T
         dist_sq = torch.clamp(dist_sq, min=0.0)  # Avoid numerical errors
         dist_matrix = torch.sqrt(dist_sq)
     
-    elif self.metric == 'manhattan':
+    elif metric == 'manhattan':
         # Sum of absolute differences
         dist_matrix = torch.cdist(X, X, p=1)
     
-    elif self.metric == 'cosine':
+    elif metric == 'cosine':
         # 1 - (x_i • x_j) / (||x_i|| * ||x_j||)
         X_normalized = X / torch.norm(X, dim=1, keepdim=True)
         dist_matrix = 1 - X_normalized @ X_normalized.T

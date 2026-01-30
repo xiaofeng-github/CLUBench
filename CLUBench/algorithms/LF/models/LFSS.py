@@ -6,7 +6,6 @@ import sys
 from sklearn.metrics import normalized_mutual_info_score, accuracy_score, adjusted_rand_score
 import os.path as osp
 sys.path.append(osp.dirname(osp.dirname(osp.abspath(__file__))))
-sys.path.append(osp.dirname(osp.dirname(osp.abspath(__file__))))
 import torch.nn.functional as F
 #from models.Accuracy import clustering, best_match, test_torch_times
 #from models.util import adjust_learning_rate
@@ -222,8 +221,8 @@ def get_embedding_for_test(model,data_loader, mode = 'k'):
     features = torch.cat(local_features, dim=0)
     features = torch.nn.functional.normalize(features, dim=-1)
     labels = torch.cat(local_labels, dim=0)
-    print(features.shape)
-    print(labels.shape)
+    #print(features.shape)
+    #print(labels.shape)
     return features, labels
 def nt_xent(x, t=0.5, features2=None):
 
@@ -246,7 +245,7 @@ def nt_xent(x, t=0.5, features2=None):
     # print("temperature is {}".format(t))
     neg = torch.exp(torch.mm(out, out.t().contiguous()) / t)
 
-    mask = get_negative_mask(batch_size).cuda()
+    mask = get_negative_mask(batch_size).to(x.device)
     neg = neg.masked_select(mask).view(2 * batch_size, -1)
 
     # pos score
@@ -341,11 +340,11 @@ class SimpleMLP(nn.Module):
 
 class LFSS(nn.Module):
 
-    def __init__(self,momentum_base,dim_in,hidden_dims,num_cluster,temperature,fea_dim,sigma,lamb_da,hidden_size,amp,device):
+    def __init__(self, momentum_base,dim_in,hidden_dims,num_cluster,temperature,fea_dim,sigma,lamb_da,hidden_size,amp,device):
         nn.Module.__init__(self)
         self.n_clusters=num_cluster
-        encoder = SimpleMLP(fea_dim,hidden_dims,dim_in)
-        print(encoder)
+        encoder = SimpleMLP(dim_in,hidden_dims,fea_dim)
+        # print(encoder)
         self.dim_in=dim_in
         self.m = momentum_base
         self.num_cluster = num_cluster
@@ -360,7 +359,7 @@ class LFSS(nn.Module):
         # create the encoders
         self.encoder_q = encoder
         self.projector_q = nn.Sequential(
-            nn.Linear(self.dim_in,self.hidden_size),
+            nn.Linear(self.fea_dim,self.hidden_size),
             nn.BatchNorm1d(self.hidden_size),
             nn.ReLU(inplace=True),
             nn.Linear(self.hidden_size, self.fea_dim)
@@ -402,7 +401,7 @@ class LFSS(nn.Module):
         #        self.encoder_q = torch.nn.SyncBatchNorm.convert_sync_batchnorm(self.encoder_q)
         #        self.projector_q = torch.nn.SyncBatchNorm.convert_sync_batchnorm(self.projector_q)
         #        self.predictor = torch.nn.SyncBatchNorm.convert_sync_batchnorm(self.predictor)
-        self.feature_extractor_copy = copy.deepcopy(self.encoder).cuda()
+        self.feature_extractor_copy = copy.deepcopy(self.encoder).to(self.device)
 
         self.scaler = NativeScalerWithGradNormCount(amp=self.amp)
 
@@ -433,7 +432,7 @@ class LFSS(nn.Module):
         # print(n_samples)
         # print(pseudo_labels)
         weight = torch.zeros(self.num_cluster, n_samples).to(self.device)
-        samples_index = torch.arange(n_samples).cuda()
+        samples_index = torch.arange(n_samples).to(self.device)
         weight[pseudo_labels[valid_index].to(torch.long), samples_index[valid_index].to(torch.long)] = 1
         non_zero_mask = weight.any(dim=1)
         weight = weight[non_zero_mask]
@@ -547,22 +546,29 @@ class LFSS(nn.Module):
             return self.forward_nt_prt(inputs1, inputs2, momentum_update,idx)
 
     def get_pseudo_labels(self,data_loader,opt):
-        features = torch.zeros([len(data_loader.dataset), opt.fea_dim]).cuda()
-        old_features = torch.zeros([len(data_loader.dataset), opt.fea_dim]).cuda()
-        for i, (inputs, target, idx) in enumerate(data_loader):
+        features = torch.zeros([len(data_loader.dataset), opt.fea_dim]).to(self.device)
+        old_features = torch.zeros([len(data_loader.dataset), opt.fea_dim]).to(self.device)
+        for i, (idx,inputs, target) in enumerate(data_loader):
             with torch.no_grad():
-                inputs_1, inputs_2, inputs_3 = inputs
-                inputs_3 = inputs_3.cuda(non_blocking=True)
-
+                inputs_1, inputs_2, inputs_3 = inputs.float(),inputs.float(),inputs.float()
+        # inputs_1 = inputs_1.cuda(non_blocking=True)
+        # inputs_2 = inputs_2.cuda(non_blocking=True)
+        # inputs_3 = inputs_3.cuda(non_blocking=True)
+                #print(idx.shape)
+                inputs_1 = inputs_1.to(self.device)
+                inputs_2 = inputs_2.to(self.device)
+                inputs_3 = inputs_3.to(self.device)
                 feature = self.encoder_k(inputs_3)
                 feature = self.projector_k(feature)
+                #print(feature.shape)
+                #print(features.shape)
                 features[idx] = feature
                 old_feature = self.pre_encoder(inputs_3)
                 old_features[idx] = old_feature
-        y_pred, _ = clustering(features, opt.num_cluster)
-        old_y_pred, _ = clustering(old_features, opt.num_cluster)
+        y_pred, _ = clustering(features, self.n_clusters)
+        old_y_pred, _ = clustering(old_features, self.n_clusters)
         y_pred = best_match(old_y_pred.cpu().numpy(), y_pred.cpu().numpy())
-        y_pred = torch.from_numpy(y_pred).cuda()
+        y_pred = torch.from_numpy(y_pred).to(self.device)
         feature1 = torch.nn.functional.normalize(old_features, dim=-1)
         feature2 = torch.nn.functional.normalize(features, dim=-1)
         s = cosine_similarity(feature1, feature2, dim=1)
@@ -585,21 +591,24 @@ class LFSS(nn.Module):
             param_k.data = param_k.data * self.m + param_q.data * (1. - self.m)
 
 
-def train_LFSS(opt, model, optimizer, train_loader, epoch):
+def train_LFSS(opt, model, optimizer, train_loader, epoch, device):
     n_iter = opt.num_batch * (epoch - 1) + 1
     if epoch > opt.eta and (((epoch - 1) % opt.prototype_freq == 0) or model.pseudo_labels == None):
         model.get_pseudo_labels(train_loader, opt)
 
     for i, (idx,inputs, target) in enumerate(train_loader):
         inputs_1, inputs_2, inputs_3 = inputs.float(),inputs.float(),inputs.float()
-        inputs_1 = inputs_1.cuda(non_blocking=True)
-        inputs_2 = inputs_2.cuda(non_blocking=True)
-        inputs_3 = inputs_3.cuda(non_blocking=True)
+        # inputs_1 = inputs_1.cuda(non_blocking=True)
+        # inputs_2 = inputs_2.cuda(non_blocking=True)
+        # inputs_3 = inputs_3.cuda(non_blocking=True)
+        inputs_1 = inputs_1.to(device)
+        inputs_2 = inputs_2.to(device)
+        inputs_3 = inputs_3.to(device)
 
         model.train()
         lr = adjust_learning_rate(opt, model, optimizer, n_iter)
         update_params = (n_iter % opt.acc_grd_step == 0)
-        with torch.autocast(model.device, enabled=opt.amp):
+        with torch.autocast(torch.device(model.device).type, enabled=opt.amp):
             loss = model(inputs_1, inputs_2, epoch, opt.eta, update_params, idx)
         loss = loss / opt.acc_grd_step
         # model.pre_encoder = copy.deepcopy(model.encoder)

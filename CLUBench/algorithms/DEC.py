@@ -406,7 +406,7 @@ class DEC(BaseCluster):
 
         h = deepcopy(self.X)
         for layer_i, i in enumerate(range(len(dims) - 1)):
-            print(f'pretrain DAE for SAE layer [{i + 1}]')
+            # print(f'pretrain DAE for SAE layer [{i + 1}]')
             if layer_i == 0:
                 h, dae_encoder, dae_decoder = self._train_dae(X=h, input_dim=dims[i], hidden_dim=dims[i + 1], g2='leaky_relu')
             elif layer_i == len(dims) - 2:
@@ -470,7 +470,7 @@ class DEC(BaseCluster):
                 loss.backward()
                 optimizer.step()
                 epoch_loss += loss.item()
-            print(f"Pretrain SAE Epoch {epoch}/{epochs}, Loss: {epoch_loss}")
+            # print(f"Pretrain SAE Epoch {epoch}/{epochs}, Loss: {epoch_loss}")
 
         return model.encoder, model.hidden_dims[-1]
     
@@ -492,6 +492,6 @@ class DEC(BaseCluster):
                                    epochs=self.epochs, batch_size=self.batch_size, device=self.device)
         if self.final_epoch:
             self.labels = self.labels[-1]
-        self.times = time.time() - self.times
+        self.time = time.time() - self.time
         return self.labels
     
