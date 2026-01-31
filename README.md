@@ -12,7 +12,7 @@ Clustering is a fundamental problem in data science with a long-standing researc
 
 ## 📊 **Benchmark Datasets**
 
-| ID | Dataset | Type | # size | dim | # clusters | r_mm | r_ma | IR |
+| ID | Dataset | Type | size | dim | clusters | r_mm | r_ma | IR |
 |---:|:---|---|---:|---:|:---:|:---:|:---:|:---:|
 | [1] | echocardiogram | tabular | 61 | 10 | 2 | 0.386 | 0.279 | 0.221 |
 | [2] | skillcraft1_master_table_dataset | tabular | 3303 | 18 | 6 | 0.206 | 0.051 | 0.071 |
