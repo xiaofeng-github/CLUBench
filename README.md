@@ -150,21 +150,24 @@ Clustering is a fundamental problem in data science with a long-standing researc
 
 ## 🛠️ **Prerequisites and Installation**
 1. ### Environment:
-    - Python 3.10
+    - ![](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=Python&logoColor=ffffff) Python 3.10 
 
+    - ![](https://img.shields.io/badge/CUDA-76B900?logo=nvidia&logoColor=white) CUDA 12.1
 
 2. ### Datasets: due to space limitation in GitHub, we cannot upload the whole 131 Benchmark Datasets, only 10 datasets are provided in /CLUBench/datasets. The overall datasets can be download in [CLUBench-Datasets](https://huggingface.co/datasets/Feng-001/Clustering-Benchmark) (unzip and save in ./CLUBench/datasets).
 
 3. ### Install CLUBench
 
-    - `pip install -e .`
+```bash
+    pip install -e .
+```
 
 
 ## 🚀 **Quick Starts**
 
 - ### Complete Benchmark Datasets
 
-    ```
+    ```python
     from CLUBench import DATASETS
 
     print('CLUBench Datasets =================================================')
@@ -173,7 +176,7 @@ Clustering is a fundamental problem in data science with a long-standing researc
 
 - ### Clustering (e.g. using DEC) on benchmark dataset (e.g. weather.npz)
 
-    ```
+    ```python
     from CLUBench import DEC, load_data
     
     data_name = 'weather.npz'
@@ -196,7 +199,7 @@ Clustering is a fundamental problem in data science with a long-standing researc
 
 - ### Clustering using predefined HPC
 
-    ```
+    ```python
     from CLUBench import DEC, load_data, load_hpc
     
     data_name = 'weather.npz'
@@ -237,7 +240,12 @@ Clustering is a fundamental problem in data science with a long-standing researc
 
 ## 🛠️ **Low-Rank Analysis**
 
+```bash
+cd ./low_rank
 ```
+
+
+```python
     # default settings
     python main.py
 
@@ -252,7 +260,8 @@ Clustering is a fundamental problem in data science with a long-standing researc
 
 ## 🛠️ **Meta-features**
 
-```
+
+```python
 # load meta-features
 from utils import load_meta_features
 meta_features = load_meta_features()
@@ -262,7 +271,7 @@ meta_features = load_meta_features()
 
 ## 🛠️ **Performance Matrices**
 
-```
+```python
 # load best_hpc performance matrices
 
 from utils import load_best_p
