@@ -177,6 +177,7 @@ Clustering is a fundamental problem in data science with a long-standing researc
 - ### Clustering (e.g. using DEC) on benchmark dataset (e.g. weather.npz)
 
     ```python
+    import numpy as np
     from CLUBench import DEC, load_data
     
     data_name = 'weather.npz'
@@ -200,6 +201,7 @@ Clustering is a fundamental problem in data science with a long-standing researc
 - ### Clustering using predefined HPC
 
     ```python
+    import numpy as np
     from CLUBench import DEC, load_data, load_hpc
     
     data_name = 'weather.npz'
@@ -281,7 +283,7 @@ acc, nmi, ari = load_best_p()
 
 # load all_hpcs performance matrices
 
-from utils import load_all_hpc
+from utils import load_all_p
 
 acc, nmi, ari = load_all_p()
 

@@ -2,11 +2,11 @@
 Authors: Wouter Van Gansbeke, Simon Vandenhende
 Licensed under the CC BY-NC 4.0 license (https://creativecommons.org/licenses/by-nc/4.0/)
 """
-import os
+# import os
 import math
 import numpy as np
 import torch
-import torchvision.transforms as transforms
+# import torchvision.transforms as transforms
 from .collate import collate_custom
 from torch.utils.data import Dataset
 import torch.nn as nn
