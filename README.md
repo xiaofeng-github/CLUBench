@@ -10,7 +10,25 @@
 ## ✅ *Abstract*
 Clustering is a fundamental problem in data science with a long-standing research history. Over the past decades, numerous clustering algorithms, ranging from conventional machine learning approaches to deep clustering methods, have been developed. Despite this progress, a systematic and large-scale empirical evaluation that jointly considers conventional algorithms, deep learning-based methods and recent foundation model-based clustering remains largely absent, leading to limited guidance on algorithm selection and deployment. To address this gap, we introduce CLUBench, a comprehensive clustering benchmark comprising 24 algorithms of diverse principles evaluated on 131 datasets across tabular, text and image data. Importantly, CLUBench provides a unified comparison between state-of-the-art baselines and foundation model-energized clustering strategies on all three modalities (tabular, text and image). Extensive experiments (178,815) in CLUBench yield statistically meaningful insights and identify promising yet underexplored pathways about clustering research. For example, we observe low-rank structure in cross-model performance matrices, which facilitates an efficient strategy for rapid algorithm evaluation and selection in practical applications. In addition, we provide an easy-to-use toolbox by encapsulating the source codes from the official code repository into a unified framework, accompanied by detailed instructions.
 
+
+## 📊 **Deep Clustering Methods**
+- [Unsupervised Deep Embedding for Clustering Analysis (DEC), ICML 2016](https://proceedings.mlr.press/v48/xieb16.html)
+- [Improved Deep Embedded Clustering with Local Structure Preservation (IDEC), IJCAI 2017](https://www.ijcai.org/proceedings/2017/0243.pdf)
+- [Deep Subspace Clustering Networks (DSCN), NeurIPS 2017](https://arxiv.org/abs/1709.02508)
+- [Deep Semantic Clustering by Partition Confidence Maximisation (PICA), CVPR 2021](https://openaccess.thecvf.com/content_CVPR_2020/papers/Huang_Deep_Semantic_Clustering_by_Partition_Confidence_Maximisation_CVPR_2020_paper.pdf)
+- [Contrastive clustering (ConClu), AAAI 2021](https://arxiv.org/abs/2009.09687)
+- [Efficient Deep Embedded Subspace Clustering (EDESC), CVPR 2022](https://openaccess.thecvf.com/content/CVPR2022/papers/Cai_Efficient_Deep_Embedded_Subspace_Clustering_CVPR_2022_paper.pdf)
+- [Dual Mutual Information Constraints for Discriminative Clustering (DMICC), AAAI 2023](https://ojs.aaai.org/index.php/AAAI/article/view/26032)
+- [DivClust: Controlling Diversity in Deep Clustering (DIVC), CVPR 2023](https://openaccess.thecvf.com/content/CVPR2023/papers/Metaxas_DivClust_Controlling_Diversity_in_Deep_Clustering_CVPR_2023_paper.pdf)
+- [P<sup>2</sup>OT: Progressive Partial Optimal Transport for Deep Imbalanced Clustering (P<sup>2</sup>OT), ICLR 2024](https://arxiv.org/abs/2401.09266)
+- [Learning from Sample Stability for Deep Clustering (LFSS), ICML 2025](https://proceedings.mlr.press/v267/li25am.html)
+
+
 ## 📊 **Benchmark Datasets**
+
+### Source From:
+- Jeon, Hyeon, et al. "Measuring the validity of clustering validation datasets." IEEE Transactions on Pattern Analysis and Machine Intelligence (2025).
+- https://www.openml.org/search?type=data&status=active
 
 | ID | Dataset | Type | size | dim | clusters | r_mm | r_ma | IR |
 |---:|:---|---|---:|---:|:---:|:---:|:---:|:---:|
