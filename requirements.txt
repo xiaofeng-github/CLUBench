@@ -4,7 +4,7 @@ numpy==1.26.4
 tqdm
 scipy==1.15.3
 pyclustering==0.10.1.2
-munkres==1.14
+munkres
 termcolor==2.1.0
 easydict==1.13
 click
