@@ -14,14 +14,14 @@ Clustering is a fundamental problem in data science with a long-standing researc
 ## 📊 **Deep Clustering Methods**
 - [Unsupervised Deep Embedding for Clustering Analysis (DEC), ICML 2016](https://proceedings.mlr.press/v48/xieb16.html)
 - [Improved Deep Embedded Clustering with Local Structure Preservation (IDEC), IJCAI 2017](https://www.ijcai.org/proceedings/2017/0243.pdf)
-- [Deep Subspace Clustering Networks (DSCN), NeurIPS 2017](https://arxiv.org/abs/1709.02508)
-- [Deep Semantic Clustering by Partition Confidence Maximisation (PICA), CVPR 2021](https://openaccess.thecvf.com/content_CVPR_2020/papers/Huang_Deep_Semantic_Clustering_by_Partition_Confidence_Maximisation_CVPR_2020_paper.pdf)
-- [Contrastive clustering (ConClu), AAAI 2021](https://arxiv.org/abs/2009.09687)
-- [Efficient Deep Embedded Subspace Clustering (EDESC), CVPR 2022](https://openaccess.thecvf.com/content/CVPR2022/papers/Cai_Efficient_Deep_Embedded_Subspace_Clustering_CVPR_2022_paper.pdf)
-- [Dual Mutual Information Constraints for Discriminative Clustering (DMICC), AAAI 2023](https://ojs.aaai.org/index.php/AAAI/article/view/26032)
-- [DivClust: Controlling Diversity in Deep Clustering (DIVC), CVPR 2023](https://openaccess.thecvf.com/content/CVPR2023/papers/Metaxas_DivClust_Controlling_Diversity_in_Deep_Clustering_CVPR_2023_paper.pdf)
-- [P<sup>2</sup>OT: Progressive Partial Optimal Transport for Deep Imbalanced Clustering (P<sup>2</sup>OT), ICLR 2024](https://arxiv.org/abs/2401.09266)
-- [Learning from Sample Stability for Deep Clustering (LFSS), ICML 2025](https://proceedings.mlr.press/v267/li25am.html)
+- [Deep Subspace Clustering Networks (DSCN), NeurIPS 2017](https://arxiv.org/abs/1709.02508),  [[Original Code]](https://github.com/panji530/Deep-subspace-clustering-networks)
+- [Deep Semantic Clustering by Partition Confidence Maximisation (PICA), CVPR 2020](https://openaccess.thecvf.com/content_CVPR_2020/papers/Huang_Deep_Semantic_Clustering_by_Partition_Confidence_Maximisation_CVPR_2020_paper.pdf), [[Original Code]](https://github.com/Raymond-sci/PICA)
+- [Contrastive clustering (ConClu), AAAI 2021](https://arxiv.org/abs/2009.09687), [[Original Code]](https://github.com/Yunfan-Li/Contrastive-Clustering)
+- [Efficient Deep Embedded Subspace Clustering (EDESC), CVPR 2022](https://openaccess.thecvf.com/content/CVPR2022/papers/Cai_Efficient_Deep_Embedded_Subspace_Clustering_CVPR_2022_paper.pdf), [[Original Code]](https://github.com/JinyuCai95/EDESC-pytorch)
+- [Dual Mutual Information Constraints for Discriminative Clustering (DMICC), AAAI 2023](https://ojs.aaai.org/index.php/AAAI/article/view/26032), [[Original Code]](https://github.com/Li-Hyn/DMICC)
+- [DivClust: Controlling Diversity in Deep Clustering (DIVC), CVPR 2023](https://openaccess.thecvf.com/content/CVPR2023/papers/Metaxas_DivClust_Controlling_Diversity_in_Deep_Clustering_CVPR_2023_paper.pdf), [[Original Code]](https://github.com/ManiadisG/DivClust)
+- [P<sup>2</sup>OT: Progressive Partial Optimal Transport for Deep Imbalanced Clustering (P<sup>2</sup>OT), ICLR 2024](https://arxiv.org/abs/2401.09266), [[Original Code]](https://github.com/rhfeiyang/PPOT)
+- [Learning from Sample Stability for Deep Clustering (LFSS), ICML 2025](https://proceedings.mlr.press/v267/li25am.html), [[Original Code]](https://github.com/LZX-001/LFSS)
 
 
 ## 📊 **Benchmark Datasets**
