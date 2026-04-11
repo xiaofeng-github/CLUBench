@@ -172,7 +172,10 @@ Clustering is a fundamental problem in data science with a long-standing researc
 
     - ![](https://img.shields.io/badge/CUDA-76B900?logo=nvidia&logoColor=white) CUDA 12.1
 
-2. ### Datasets: due to space limitation in GitHub, we cannot upload the whole 131 Benchmark Datasets, only 10 datasets are provided in /CLUBench/datasets. The overall datasets can be download in [CLUBench-Datasets](https://huggingface.co/datasets/Feng-001/Clustering-Benchmark) (unzip and save in ./CLUBench/datasets).
+2. ### Datasets: due to space limitation in GitHub, we cannot upload the whole 131 Benchmark Datasets, only 10 datasets are provided in /CLUBench/datasets. 
+    - The overall datasets can be download in [CLUBench-Datasets](https://huggingface.co/datasets/Feng-001/Clustering-Benchmark) (unzip and save in ./CLUBench/datasets).
+    - [Text Embedding Datasets](https://huggingface.co/datasets/Feng-001/Text-ADBench).
+    - [Image Embedding Datasets](https://huggingface.co/datasets/Feng-001/Clustering-Benchmark).
 
 3. ### Install CLUBench
 
