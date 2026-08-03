@@ -3,6 +3,14 @@
 
 # 📖 CLUBench (A Clustering Benchmark).
 
+## 📰 Latest News
+
+### 📅 2026/08/03
+
+- 🎉 Our work has been accepted by **SIGKDD 2026**!
+- 📄 Paper: [arXiv:2605.29933](https://arxiv.org/abs/2605.29933)
+- 🧩 **Update:** Added meta-feature construction scripts for model selection.
+
 
 ![RoadMap of CLUBench](./figs/MAP.png)
 
